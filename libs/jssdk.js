@@ -141,18 +141,20 @@ JSSDK.prototype = {
 	},
 };
 
-const sdk = new JSSDK('wx68e792fab2d601dd','fd348d4ace4efad48cc28b715b555992');
-debug(sdk.createNonceStr());
-debug(sdk.createNonceStr());
+const jssdk = new JSSDK('wx68e792fab2d601dd','fd348d4ace4efad48cc28b715b555992');
+module.exports = jssdk;
 
-sdk.getAccessToken(function(err, accessToken){
-	console.log(arguments);
-});
+//debug(sdk.createNonceStr());
+//debug(sdk.createNonceStr());
 
-sdk.getJsApiTicket(function(err, accessToken){
-        console.log(arguments);
-});
+//sdk.getAccessToken(function(err, accessToken){
+//	console.log(arguments);
+//});
 
-sdk.getSignPackage('http://101.132.79.91/wechat/hello', function(err, accessToken){
-        console.log(arguments);
-});
+//sdk.getJsApiTicket(function(err, accessToken){
+//	console.log(arguments);
+//});
+
+//sdk.getSignPackage('http://101.132.79.91/wechat/hello', function(err, accessToken){
+//	console.log(arguments);
+//});

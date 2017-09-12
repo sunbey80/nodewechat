@@ -1,10 +1,22 @@
 var express = require('express');
 var router = express.Router();
 const crypto = require('crypto');
+const jssdk = require('../libs/jssdk');
 
 /* GET home page. */
 router.get('/wechat/hello', function(req, res, next) {
-  res.render('index', { title: 'Express From Aliyun ECS' });
+	jssdk.getSignPackage(`http://101.132.79.91${req.url}`, function(err, signPackage){
+		if(err){
+			return next(err);
+		}
+		
+		// Jade Template
+		res.render('index', {
+			title: 'Hello Wechat from Aliyun ECS ---> Express',
+			signPackage: signPackage,
+			pretty: true,
+		});
+	});
 });
 
 const token = '5xfoRDWGMggLqH5OmpPu';
