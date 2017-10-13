@@ -3,6 +3,8 @@ extends layout
 block content
 	h1= title
 	p Welcome to #{title}
+	div#position position
+	div(onclick='getLocation()') get
 	script(src='http://res.wx.qq.com/open/js/jweixin-1.0.0.js')
 	script.
 		var signPackage = !{JSON.stringify(signPackage)};
@@ -36,3 +38,34 @@ block content
 				}
 			});
 		})
+	script.
+		var x = document.getElementById("position");
+		function getLocation(){
+			console.log('it works');
+			console.log(navigator.geolocation, ' yes');
+			if(navigator.geolocation){
+				navigator.geolocation.getCurrentPosition(showPosition, showError);
+			}else{
+				x.innerHTML = 'not supported';
+			}
+		}
+		function showError(error){
+			switch(error.code){
+				case error.PERMISSION_DENIED:
+				alert('user refused');
+				break;
+				case error.POSITION_UNAVAILABLE:
+				alert('infor not used');
+				break;
+				case error.UNKNOWN_ERROR:
+				alert('timeout');
+				break;
+				case error.UNKNOWN_ERROR:
+				alert('system failed');
+				break;
+			}
+		}
+		function showPosition(position){
+			console.log('enter callback');
+			x.innerHTML = 'Latitude: ' + position.coords.latitude + '<br/>Longitude: ' + position.coords.longitude;
+		}
